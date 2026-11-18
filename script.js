@@ -46,8 +46,7 @@
       link: linkOpenAI,
       primaryLabel: 'Active · Primary',
       standbyLabel: 'Standby · Primary',
-      failedLabel: 'Down (HTTP 503)',
-      failoverLatency: '340ms'
+      failedLabel: 'Down (HTTP 503)'
     },
     {
       id: 'anthropic',
@@ -57,8 +56,7 @@
       link: linkAnthropic,
       primaryLabel: 'Active · Secondary',
       standbyLabel: 'Standby · Secondary',
-      failedLabel: 'Down (Rate Limit 429)',
-      failoverLatency: '410ms'
+      failedLabel: 'Down (Rate Limit 429)'
     },
     {
       id: 'google',
@@ -68,8 +66,7 @@
       link: linkGoogle,
       primaryLabel: 'Active · Tertiary',
       standbyLabel: 'Standby · Tertiary',
-      failedLabel: 'Down (Timeout 504)',
-      failoverLatency: '290ms'
+      failedLabel: 'Down (Timeout 504)'
     }
   ];
 
@@ -107,19 +104,19 @@
       statusText.textContent = 'Routing state: Primary active (OpenAI)';
       controlStatusDesc.textContent = 'All systems healthy. Click to simulate an upstream OpenAI outage.';
       btnSimulate.textContent = 'Simulate a provider outage';
-      if (routerMetric) routerMetric.textContent = 'strategy: latency+health';
+      if (routerMetric) routerMetric.textContent = 'task policy';
     } else if (state === 1) {
       statusPulse.className = 'status-pulse';
       statusText.textContent = 'Failover complete — routed to Anthropic';
-      controlStatusDesc.textContent = 'OpenAI outage mitigated. Task redirected to Anthropic in ~340ms.';
+      controlStatusDesc.textContent = 'Simulated OpenAI outage. The task is redirected to Anthropic.';
       btnSimulate.textContent = 'Simulate Anthropic outage';
-      if (routerMetric) routerMetric.textContent = 'fallback: level-1 active';
+      if (routerMetric) routerMetric.textContent = 'fallback #1';
     } else if (state === 2) {
       statusPulse.className = 'status-pulse';
       statusText.textContent = 'Failover complete — routed to Google';
       controlStatusDesc.textContent = 'Anthropic degraded. Traffic cascaded to Google fallback provider.';
       btnSimulate.textContent = 'Simulate Google outage';
-      if (routerMetric) routerMetric.textContent = 'fallback: level-2 active';
+      if (routerMetric) routerMetric.textContent = 'fallback #2';
     } else if (state >= 3) {
       // All failed
       providers.forEach((p) => {
@@ -131,9 +128,9 @@
       });
       statusPulse.className = 'status-pulse failed';
       statusText.textContent = 'All providers degraded — task-level fallback exhausted';
-      controlStatusDesc.textContent = 'All 3 providers simulated down. Circuit breaker engaged.';
+      controlStatusDesc.textContent = 'All 3 providers simulated down. The fallback chain is exhausted.';
       btnSimulate.textContent = 'Reset simulation';
-      if (routerMetric) routerMetric.textContent = 'circuit: open (tripped)';
+      if (routerMetric) routerMetric.textContent = 'fallbacks exhausted';
     }
   }
 
@@ -167,7 +164,7 @@
     statusPulse.className = 'status-pulse recovering';
     statusText.textContent = `${failedProvider.name} outage detected — initiating failover...`;
     controlStatusDesc.textContent = `Anomaly detected on ${failedProvider.name}. Selecting next healthy fallback...`;
-    if (routerMetric) routerMetric.textContent = 'rerouting in progress...';
+    if (routerMetric) routerMetric.textContent = 'selecting provider';
 
     // Phase 2: After ~500ms delay, switch to next provider or fail gracefully
     setTimeout(() => {
