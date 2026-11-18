@@ -21,7 +21,7 @@ The portfolio links are configured as follows:
 
 | Resource | URL | Locations |
 | :--- | :--- | :--- |
-| **Resume (Google Drive)** | [Google Drive Resume](https://drive.google.com/file/d/1Rm3-pFNB9KRccZpInSo53PpZMFd2KpD0/view?usp=sharing) | Nav button, Hero button, Contact card, Footer |
+| **Resume (Google Drive)** | [Google Drive Resume](https://drive.google.com/file/d/16WRUV8FV-nVxWKEltA7FB_Ivh4JYpA99/view?usp=sharing) | Nav button, Hero button, Contact card, Footer |
 | **LinkedIn** | [linkedin.com/in/ash49](https://www.linkedin.com/in/ash49/) | Hero metadata list, Contact section |
 | **GitHub** | [github.com/enigma49](https://github.com/enigma49) | Hero metadata list, Contact section |
 | **Email** | `mailto:shaikhhamza157@gmail.com` | Hero button, Contact section |
