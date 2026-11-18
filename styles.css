@@ -1119,6 +1119,11 @@ main, main section, .case-study, .proof-card {
   align-items: start;
 }
 
+/* The lead project spans the full row, so the other two cards sit side by side below it. */
+.proof-card-featured {
+  grid-column: 1 / -1;
+}
+
 .case-study, .proof-card {
   min-width: 0;
   background: var(--bg-panel);
